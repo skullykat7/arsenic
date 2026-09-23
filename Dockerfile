@@ -29,15 +29,20 @@ RUN chmod +x ./replit-run.sh && chmod +x ./docker-sed.sh && chmod +x ./docker-en
 FROM nginx:stable-alpine
 
 # default environment variables in case a normal user doesn't specify it
+
+
+# default environment variables
 ENV PORT=80
-# set SAFE_BROWSING to any value to enable it
-#ENV SAFE_BROWSING=1
+# set SAFE_BROWSING=1 if you want to enable it
+# ENV SAFE_BROWSING=1
 
 COPY --from=builder /opt/womginx /opt/womginx
-RUN chmod +x /opt/womginx/docker-entrypoint.sh
-RUN cp /opt/womginx/nginx.conf /etc/nginx/nginx.conf
 
-# make sure nginx.conf works (mainly used for development)
+RUN chmod +x /opt/womginx/docker-entrypoint.sh \
+ && cp /opt/womginx/nginx.conf /etc/nginx/nginx.conf \
+ && nginx -t
+
+CMD ["/opt/womginx/docker-entrypoint.sh"]
 RUN nginx -t
 
 CMD /opt/womginx/docker-entrypoint.sh
