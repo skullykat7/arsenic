@@ -3,7 +3,7 @@
 set -e
 
 # environment variables are set at runtime, so modify the conf only when it starts
-sed -i "s/listen 80/listen $PORT/" /etc/nginx/nginx.conf
+
 
 if [ ! -z "$SAFE_BROWSING" ]; then
     sed -i "s/1.1.1.1/1.1.1.3/" /etc/nginx/nginx.conf
