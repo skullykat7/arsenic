@@ -34,6 +34,7 @@ ENV PORT=80
 #ENV SAFE_BROWSING=1
 
 COPY --from=builder /opt/womginx /opt/womginx
+RUN chmod +x /opt/womginx/docker-entrypoint.sh
 RUN cp /opt/womginx/nginx.conf /etc/nginx/nginx.conf
 
 # make sure nginx.conf works (mainly used for development)
