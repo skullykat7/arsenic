@@ -24,7 +24,7 @@ RUN mv dist .. && rm -rf * .git && mv ../dist/ .
 WORKDIR /opt/womginx
 
 # Add the `chmod` commands here
-RUN chmod +x ./replit-run.sh && chmod +x ./docker-sed.sh && ./docker-sed.sh
+RUN chmod +x ./replit-run.sh && chmod +x ./docker-sed.sh && chmod +x ./docker-entrypoint.sh && ./docker-sed.sh
 
 FROM nginx:stable-alpine
 
